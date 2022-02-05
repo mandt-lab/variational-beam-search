@@ -2,6 +2,12 @@
 
 Code repository of NeurIPS 2021 paper [Detecting and Adapting to Irregular Distribution Shifts in Bayesian Online Learning](https://proceedings.neurips.cc/paper/2021/hash/362387494f6be6613daea643a7706a42-Abstract.html).
 
+Package requirements are listed in `requirements.txt`. Run 
+`
+pip install -r requirements.txt
+`
+to install all packages.
+
 ## Toy Example
 
 <img title="" src="./toy_example/toy_beam_search.png" alt="toy_data" data-align="inline">
