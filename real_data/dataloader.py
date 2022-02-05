@@ -4,6 +4,30 @@ import numpy as np
 
 def get_malware_dataset(valid=False):
 
+    def get_monthly_data(file_path, num_feature=483):
+        '''Each row of `x_mat` is a datapoint. 
+        It adds a constant one for another dimension at the end for the bias term.
+        
+        Returns:
+        two numpy arrays, one for input of size (num_data, num_feature) and another for the output
+        (num_data,).
+        '''
+        x_mat = []
+        y_vec = []
+        with open(file_path, 'r') as datafile:
+            for line in datafile:
+                feature = [0] * num_feature
+                feature[-1] = 1 # bias term
+
+                items = line.split()
+                y = float(items[0])
+                for item in items[1:]:
+                    k, v = item.split(':')
+                    feature[int(k)] = int(v)
+                y_vec.append(y)
+                x_mat.append(feature)
+        return np.array(x_mat), np.array(y_vec)
+
     def log_odds_vec(p):
         # convert a probability to log-odds. Feel free to ignore the "divide by
         # zero" warning since we deal with it manually. The extreme values are
@@ -19,11 +43,18 @@ def get_malware_dataset(valid=False):
     def read_data(valid, folder_name='./malware-dataset/'):
         if valid:
             # first month
-            xs = np.load(folder_name + '/X_val.npy')
-            ys = np.load(folder_name + '/y_val.npy')
+            xs, ys = get_monthly_data('./malware-dataset/2010-11.txt')
         else:
-            xs = np.load(folder_name + '/X.npy')
-            ys = np.load(folder_name + '/y.npy')
+            file_names = ['2010-12.txt', '2011-01.txt', '2011-02.txt', '2011-03.txt', '2011-04.txt', '2011-05.txt', '2011-06.txt', '2011-07.txt', '2011-08.txt', '2011-09.txt', '2011-10.txt', '2011-11.txt', '2011-12.txt', '2012-01.txt', '2012-02.txt', '2012-03.txt', '2012-04.txt', '2012-05.txt', '2012-06.txt', '2012-07.txt', '2012-08.txt', '2012-09.txt', '2012-10.txt', '2012-11.txt', '2012-12.txt', '2013-01.txt', '2013-02.txt', '2013-03.txt', '2013-04.txt', '2013-05.txt', '2013-06.txt', '2013-07.txt', '2013-08.txt', '2013-09.txt', '2013-10.txt', '2013-11.txt', '2013-12.txt', '2014-01.txt', '2014-02.txt', '2014-03.txt', '2014-04.txt', '2014-05.txt', '2014-06.txt', '2014-07.txt'] # exclude '2010-11.txt'
+
+            xs, ys = [], []
+            for f in file_names:
+                x_mat, y_vec = get_monthly_data('./malware-dataset/' + f)
+                xs.append(x_mat)
+                ys.append(y_vec)
+            xs = np.concatenate(xs, axis=0)
+            ys = np.concatenate(ys)
+
         x_train_set, y_train_set = xs[:-1], ys[:-1]
         x_test_set, y_test_set = xs[1:], ys[1:]
 
