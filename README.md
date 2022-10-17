@@ -8,7 +8,7 @@ pip install -r requirements.txt
 `
 to install all packages. 
 
-Note that only Bayesian Deep Learning and Dynamic Word Embeddings experiments require tensorflow framework; the other experiments don't.
+Note that only [bayesian_deep_learning](https://github.com/mandt-lab/variational-beam-search/tree/main/bayesian_deep_learning) and [dynamic_word_embedding](https://github.com/mandt-lab/variational-beam-search/tree/main/dynamic_word_embedding) experiments require tensorflow framework; the other experiments ([toy_example](https://github.com/mandt-lab/variational-beam-search/tree/main/toy_example), [catastrophic_remembering](https://github.com/mandt-lab/variational-beam-search/tree/main/catastrophic_remembering), [basketball_player_track](https://github.com/mandt-lab/variational-beam-search/tree/main/basketball_player_track), [real_data](https://github.com/mandt-lab/variational-beam-search/tree/main/real_data)) don't.
 
 ## Toy Example
 
