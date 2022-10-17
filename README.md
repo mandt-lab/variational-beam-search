@@ -6,7 +6,9 @@ Package requirements are listed in `requirements.txt`. Run
 `
 pip install -r requirements.txt
 `
-to install all packages.
+to install all packages. 
+
+Note that only Bayesian Deep Learning and Dynamic Word Embeddings experiments require tensorflow framework; the other experiments don't.
 
 ## Toy Example
 
